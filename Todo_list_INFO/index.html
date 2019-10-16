@@ -3,7 +3,7 @@
     <head>
       <title>TODO LIST</title>
       <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
       <script src="https://kit.fontawesome.com/5106db6593.js" crossorigin="anonymous"></script>
@@ -13,7 +13,7 @@
     </head>
     <body>
             <!--  -->
-    <div class="page-wrapper chiller-theme toggled">  
+    <div>  
             <nav id="sidebar" class="sidebar-wrapper">
                 <div class="sidebar-content">
                     <div id="toggle-sidebar">
@@ -130,7 +130,7 @@
                                     <div class="input-group">
                                             <input type="text"  id="input" class="form-control" placeholder="Enter Tasks">
                                             <div class="input-group-append">
-                                              <button id="button" class="btn btn-primary" type="button">
+                                              <button id="butt" class="btn btn-primary" type="button">
                                                 <span>ADD</span>
                                               </button>
                                             </div>
@@ -157,10 +157,41 @@
                     </div>
                 </div>
                 </div>
+
+
+                <!--**************  LOgin Modal ************-->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+      </button>
+                <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
         </main>
         <!-- page-content" -->
         </div>
  <script type="text/javascript" src="jes.js"></script>
       <script type="text/javascript" src="todo-js.js"></script>
+                
+   
     </body>
     </html>

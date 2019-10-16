@@ -37,7 +37,7 @@ function AddingTODO_LIST(){
 
 
 //When user click ADD Button
-document.getElementById("button").addEventListener("click", AddingTODO_LIST);
+document.getElementById("butt").addEventListener("click", AddingTODO_LIST);
 
 // add an item to the list user the enter key
 document.addEventListener("keyup",function(even){
@@ -63,7 +63,9 @@ function removeToDo(element){
 //Event on Check, Uncheck and Delete
 list.addEventListener("click", function(event){
     const element = event.target; 
+    // console.log(element);
     const elementJob = element.attributes.job.value;
+    // console.log(elementJob);
     
     if(elementJob == "complete"){
         completeToDo(element);
@@ -91,6 +93,7 @@ const i_board = document.getElementById('add-board-icon');
 
 var x = 0;
 function create_board(store){
+
     const item = `
     <div class="form-group col-lg-5 col-sm-12 border m-2 rounded  ">
                             <div class="col-md-12 mt-4 mb-4">
@@ -102,9 +105,9 @@ function create_board(store){
                             </ul>
                                 <div class="form-group">
                                 <div class="input-group">
-                                        <input type="text"  data-id="input" class="form-control" placeholder="Enter Tasks">
+                                        <input type="text" id="id+${x}" data-id="input+${x}" class="form-control check_input" placeholder="Enter Tasks">
                                         <div class="input-group-append">
-                                        <button data-id="1+${x}" id= "input" onclick="dynamic_test()" class="btn btn-primary check_data" type="button">
+                                        <button data-id="${x}" id= "i_check${x}" onclick="dynamic_test()" class="btn btn-primary check_data" type="button">
                                             <span>ADD</span>
                                         </button>
                                         </div>
@@ -118,10 +121,33 @@ function create_board(store){
     board_id.insertAdjacentHTML(position,item);
 }
 
+
+// $(document).ready(function(){
+//     // $(".check_data").on("click", function(){
+//     //       var element = $(this).attr('data-id');
+//     //       console.log(element);
+//     //       // element.classList.add("mystyle");
+//     //     //   element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
+//     // });
+    
+// });
+
+// var buttons = document.getElementsByTagName("button");
+// console.log(buttons);
+// var buttonsCount = buttons.length;
+// console.log(buttons[1]);
+// // for (var i = 0; i <= buttonsCount; i += 1) {
+// //     buttons[i].onclick = function(e) {
+// //         alert(this.id);
+// //     };
+// // }
+
+var j = 0;
 function dynamic_test(){
-    var element = $('.check_data').attr('data-id');
+    var element = $('#i_check'+j).data('id');
     console.log(element);
-    console.log("asfds");
+    j++;
+
 }
 function check_c_board(){
     const store = c_board.value;
@@ -131,7 +157,6 @@ function check_c_board(){
     c_board.value = "";
 }
 document.getElementById('input_board').addEventListener("click",check_c_board);
-
 
 
 
