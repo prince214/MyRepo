@@ -1,4 +1,8 @@
+
 function setCookie(cname,cvalue,exdays) {
+  // console.log("cname");
+  // console.log(cname);
+  // alert("cname"+cname);
   var d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
   var expires = "expires=" + d.toGMTString();
@@ -27,9 +31,55 @@ function checkCookie() {
     // alert("Welcome again " + user);
     document.getElementById('user_name').innerHTML = user;
   } else {
-     user = prompt("Please enter your name:","");
-     if (user != "" && user != null) {
-       setCookie("username", user, 30);
-     }
+    
+    //  user = prompt("Please enter your name:","");
+    user = document.getElementById('i1').value;
+    var pass = document.getElementById('i2').value;
+
+      if (user != "" && user != null && user == "Prince") {
+        setCookie("username", user, 30);
+        location.reload();
+      }
+      else{
+        console.log("sfsf");
+       document.getElementById('validate').innerHTML = "Wrong Credentials";
+      }  
   }
+}
+
+
+function delete_cookie(){
+  document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  
+  let timerInterval
+    Swal.fire({
+      title: 'Logging you out !!!',
+      html: 'I will close in <strong></strong> milliseconds.',
+      timer: 1000,
+      onBeforeOpen: () => {
+        Swal.showLoading()
+        timerInterval = setInterval(() => {
+          Swal.getContent().querySelector('strong')
+            .textContent = Swal.getTimerLeft()
+        }, 100)
+      },
+      onClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      if (
+        result.dismiss === Swal.DismissReason.timer
+      ) {
+        console.log('I was closed by the timer')
+      }
+    })
+
+    document.getElementById('user_name').innerHTML = "Sign in";
+    document.getElementById('validate').innerHTML = "";
+    modal.style.display = "block";
+
+}
+window.onload = function(e){ 
+  checkCookie();
+  document.getElementById('validate').innerHTML = "";
 }
