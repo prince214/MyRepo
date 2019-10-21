@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Upload Files with Ajax</h1>
+
+    <form id="myform">
+        <input type="file" name = "file" id="file">
+        <button type="submit" id="submit" name="submit">Upload</button>
+    </form>
+
+    <div style="width: 100px; height: 400px; margin-top: 50px;" id="image_preview">Image Preview:</div>
+
+    <script>
+        var myform = document.querySelector('#myform');
+        var inputfile = document.querySelector('#file');
+
+        var request = new XMLHttpRequest();
+        
+
+        myform.addEventListener('submit',function(e){
+                e.preventDefault();
+                
+                var formData = new FormData();
+                formData.append('file',inputfile.files[0]);
+
+                request.open('post','upload.php');
+                request.send(formData);
+        });
+    </script>
+
+    <script>
+    
+    $("#file").change(function(){
+
+     $('#image_preview').html("");
+     var total_file = document.getElementById("file").files.length;
+    
+        document.getElementById('image_preview').style.width="300px";
+
+     for(var i=0;i<total_file;i++)
+     {
+      $('#image_preview').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'>");
+     }
+
+
+  });
+    </script>
+</body>
+</html>
