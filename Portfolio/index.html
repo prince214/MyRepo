@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script src = "app.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5106db6593.js" crossorigin="anonymous"></script>
+    <title>Prince Paraste</title>
+
+    <style>
+            body, html {
+              height: 100%;
+              margin: 0;
+            }
+            
+            .bg {
+              background-image: url("p1.jpg");
+              height: 100%; 
+              background-position: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+            }
+
+            .ml11 {
+    font-weight: 700;
+    font-size: 2.5em;
+    color: #fff;    
+  }
+  
+  .ml11 .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.1em;
+    padding-right: 0.05em;
+    padding-bottom: 0.15em;
+  }
+  
+  .ml11 .line {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: #fff;
+    transform-origin: 0 50%;
+  }
+  
+  .ml11 .line1 { 
+    top: 0; 
+    left: 0;
+  }
+  
+  .ml11 .letter {
+    display: inline-block;
+    line-height: 1em;
+  }
+
+
+
+            </style>
+
+<style>
+        .bg a{
+              color: #fff;  
+              font-weight: bold;
+        }
+        .myname{
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        h1{
+          color: #fff;
+        }
+
+        @font-face {
+  font-family: league;
+  src: url(font/LeagueSpartan-Bold.otf);
+}
+  .content {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  }
+    </style>
+
+   
+  </head>
+  <body>
+
+   
+    <div class="bg">
+            <nav class="navbar navbar-expand-lg mb-5">
+                    <a class="navbar-brand" href="#"><span class="myname">Prince Paraste</span></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                      <div class="navbar-nav ">
+                        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="#">About</a>
+                        <a class="nav-item nav-link" href="#">Projects</a>
+                        <a class="nav-item nav-link" href="#">Experience</a>
+                        <a class="nav-item nav-link" href="#">Contact</a>
+                      </div>
+                    </div>
+                  </nav>
+                  
+                  <div class="content ml-3">
+
+                    <span><h1>Hi!!<br>My name is <span style="font-family: league";>Prince Paraste</span></h1></span>
+                      <h1 class="ml11">
+                          <span class="text-wrapper">
+                            <span class="line line1"></span>
+                            <span class="letters">A WEB DEVELOPER</span>
+                          </span>
+                        </h1>
+
+                        
+                        <div class="social">
+                            <a href="" class="link facebook" target="_parent"><i class="fab fa-facebook-square"></i></a>
+                            <a href="" class="link twitter" target="_parent"><i class="fab fa-linkedin"></i></a>
+                            <a href="" class="link google-plus" target="_parent"><i class="fab fa-github-square"></i></a>
+                          </div>
+                        
+                  </div>
+                
+
+
+
+            
+                  
+                 
+
+    </div>
+
+    <div class=""
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    <script>
+        // Wrap every letter in a span
+var textWrapper = document.querySelector('.ml11 .letters');
+textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
+
+anime.timeline({loop: true})
+  .add({
+    targets: '.ml11 .line',
+    scaleY: [0,1],
+    opacity: [0.5,1],
+    easing: "easeOutExpo",
+    duration: 700
+  })
+  .add({
+    targets: '.ml11 .line',
+    translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
+    easing: "easeOutExpo",
+    duration: 700,
+    delay: 100
+  }).add({  
+    targets: '.ml11 .letter',
+    opacity: [0,1],
+    easing: "easeOutExpo",
+    duration: 600,
+    offset: '-=775',
+    delay: (el, i) => 34 * (i+1)
+  }).add({
+    targets: '.ml11',
+    opacity: 0,
+    duration: 1000,
+    easing: "easeOutExpo",
+    delay: 1000
+  });
+    </script>
+
+</body>
+</html>
