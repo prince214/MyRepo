@@ -54,7 +54,7 @@
 
 
         <!-- ######### DataTable starts #########3 -->
-    <div style = "margin-left: 9%"; class="col-md-10 mt-5">
+    <div style = "margin-left: 14%"; class="col-md-9 mt-5">
 
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -84,9 +84,14 @@
                 <td><?php echo $row['start_date']; ?></td>
                 <td><?php echo $row['salary']; ?></td>
                 <td>
+                
                 <input type="button" data-toggle="modal" data-target="#modify<?php echo $row['id']; ?>" class="btn btn-warning" value="Modify">
                 <!-- <input type="button" data-toggle="modal" data-target="#delete<?php echo $row['id']; ?>" class="btn btn-warning" value="Delete"> -->
-                </td>
+                <form method="post" action="modify.php" style="display:inline";>
+                <input type="hidden" value="<?php echo $row['id']; ?>" name ="user_id2">
+                <button type="submit" name="delete" class="btn btn-danger">DELETE</button>
+                </form>    
+            </td>
             </tr>
 
     <!-- ####################   MODIFY MODAL  ####################3 -->
@@ -118,7 +123,7 @@
           
           <div style="display: flex; justify-content: center;">
           <input type="submit" name="modify" class="btn btn-primary mr-3 " value="MODIFY">
-          <input type="submit" name="delete" class="btn btn-primary " value="DELETE">
+          <!-- <input type="submit" name="delete" class="btn btn-primary " value="DELETE"> -->
           </div>
     </div>
     </form>
@@ -143,10 +148,7 @@
             </tr>
         </tfoot> 
     </table>
-
-
-    <!-- ########## ADD Employee Details Button ###########-->
-    
+  
 
     </section>
 
@@ -214,6 +216,7 @@
     } );
     </script>
 
+    
     </body>
     </html>
 

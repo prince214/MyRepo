@@ -22,17 +22,19 @@ if(isset($_POST['modify'])){
     }
 }
 
-if(isset($_POST['delete'])){
-    $sql = "DELETE FROM employee WHERE id=$user_id";
-    if(mysqli_query($conn,$sql)){
-        header("location:session_start.php");
+    if(isset($_POST['delete'])){
+        $user_id2 = $_POST['user_id2'];
+        $sql = "DELETE FROM employee WHERE id=$user_id2";
+        if(mysqli_query($conn,$sql)){
+            header("location:session_start.php");
+        }
+        else
+        {
+            echo "error : ";
+            echo $sql;
+        }
     }
-    else
-    {
-        echo "error : ";
-        echo $sql;
-    }
-}
+
 
 
 ?>
