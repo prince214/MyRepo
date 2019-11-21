@@ -1,0 +1,11 @@
+/*
+ Theme Name:   Test Theme Child
+ Theme URI:    https://www.x912.com/
+ Description:  Prince Production 
+ Author:       Prince Paraste
+ Author URI:   https://www.x912.com
+ Template:     new_theme
+ Version:      1.0.0
+*/
+ 
+@import url("../new_theme/style.css");
