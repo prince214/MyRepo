@@ -1,6 +1,5 @@
 <?php
 class User{
- 
     // database connection and table name
     private $conn;
     private $table_name = "users";
