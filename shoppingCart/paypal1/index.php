@@ -3,28 +3,12 @@
 session_start();
 
 
-// echo $_SESSION["cart_item"];
-       
-    foreach ($_SESSION["cart_item"] as $item){
-        $item_price = $item["quantity"]*$item["price"];
-        ?>
-                <?php echo $item["name"]; ?>
-                <?php echo $item["code"]; ?></td>
-                <?php echo $item["quantity"]; ?>
-                <?php echo "$ ".$item["price"]; ?>
-                <?php echo "$ ". number_format($item_price,2); ?>
-                <?php
-                // $total_quantity += $item["quantity"];
-                // $total_price += ($item["price"]*$item["quantity"]);
-        }
-        
-die();
-
-
 ?>
 
+
+
 <html>
-<title>Paypal Payment Gateway Integration in PHP</title>
+<title>Select payment Method</title>
 <head>
 <style>
 body {
@@ -65,32 +49,46 @@ body {
 </style>
 </head>
 <body>
+    <center>
     <div id="payment-box">
-        <img src="images/camera.jpg" />
-        <h4 class="txt-title">A6900 MirrorLess Camera</h4>
-        <div class="txt-price">$289.61</div>
+      
+        <img src="images/paypal.png" width="130" height="120">
+        <form method="post" name="cart" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
+          <input type="hidden" name="cmd" value="_cart">
+          <input type="hidden" name="upload" value="1">
+          <input type="hidden" name="business" value="poonam-merchant@gmail.com">
+          <input type="hidden" name="currency_code" value="USD">
+          <input type="hidden" name="button_subtype" value="services">
+          <input type="hidden" name="notify_url" value="http://localhost/Prince/main/mainBranch/shoppingCart/paypal1/notify.php" />
+          <input type="hidden" name="bn" value="PrinceProduction">
+          <input type="hidden" name="return" value="http://localhost/Prince/main/mainBranch/shoppingCart/paypal1/return.php" />
+
+          <?php
+          $cnt = 1;
+          foreach ($_SESSION["cart_item"] as $item){
+            ?>
+
+           <input type="hidden" name="item_name_<?php echo $cnt ?>" value="<?php echo $item["name"]; ?>"/>
+           <input type="hidden" name="amount_<?php echo $cnt ?>" value="<?php echo $item["price"]; ?>"/>
+           <input type="hidden" name="quantity_<?php echo $cnt ?>" value="<?php echo $item["quantity"]; ?>"/>
+           
+        
+           <?php
+            $cnt++;
+        }
+
+        ?>
+           
+          <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+          <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
 
 
-        <!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr"
-            method="post" target="_top">
-            <input type='hidden' name='business'
-                value='poonam-merchant@gmail.com'> <input type='hidden'
-                name='item_name' value='Camera'> <input type='hidden'
-                name='item_number' value='CAM#N1'> <input type='hidden'
-                name='amount' value='10'> <input type='hidden'
-                name='no_shipping' value='1'> <input type='hidden'
-                name='currency_code' value='USD'> <input type='hidden'
-                name='notify_url'
-                value='http://sitename/paypal-payment-gateway-integration-in-php/notify.php'>
-            <input type='hidden' name='cancel_return'
-                value='http://sitename/paypal-payment-gateway-integration-in-php/cancel.php'>
-            <input type='hidden' name='return'
-                value='http://sitename/paypal-payment-gateway-integration-in-php/return.php'>
-            <input type="hidden" name="cmd" value="_xclick"> <input
-                type="submit" name="pay_now" id="pay_now"
-                Value="Pay Now">
-        </form> -->
+    </div>
 
+    <div id="payment-box">
+      
+        <img src="images/authorize.png" width="130" height="120">
         <form method="post" name="cart" action="https://www.sandbox.paypal.com/cgi-bin/webscr">
           <input type="hidden" name="cmd" value="_cart">
           <input type="hidden" name="upload" value="1">
@@ -101,20 +99,28 @@ body {
           <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
           <input type="hidden" name="return" value="http://www.mysite.org/thank_you_kindly.html" />
 
-           <input type="hidden" name="item_name_1" value="product1"/>
-                 <input type="hidden" name="amount_1" value="12"/>
+          <?php
+          $cnt = 1;
+          foreach ($_SESSION["cart_item"] as $item){
+            ?>
 
-                 <input type="hidden" name="item_name_2" value="product2"/>
-                 <input type="hidden" name="amount_2" value="13"/>
+           <input type="hidden" name="item_name_<?php echo $cnt ?>" value="<?php echo $item["name"]; ?>"/>
+           <input type="hidden" name="amount_<?php echo $cnt ?>" value="<?php echo $item["price"]; ?>"/>
+           <input type="hidden" name="quantity_<?php echo $cnt ?>" value="<?php echo $item["quantity"]; ?>"/>
+           
+        
+           <?php
+            $cnt++;
+        }
 
-
-      
-         
+        ?>
+           
           <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
           <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
         </form>
 
 
     </div>
+    </center>
 </body>
 </html>

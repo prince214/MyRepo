@@ -7,9 +7,9 @@ class DBController
 
     private $user = "root";
 
-    private $password = "";
+    private $password = "toor";
 
-    private $database = "shopcart1";
+    private $database = "x917_code";
 
     private $conn;
 

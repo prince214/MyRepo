@@ -21,6 +21,8 @@
     <div class="response-text">
         You have placed your order successfully.<br> Thank you for
         shopping with us!
+
     </div>
+    <div><a href="../index.php">Continue Shopping</a></div>
 </body>
 </html>

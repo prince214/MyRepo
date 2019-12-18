@@ -1,6 +1,11 @@
 <html>
         <head>
         <title>Charisma</title>
+         <link rel="stylesheet" href="">
+  
+    <?= link_tag("https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css") ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <?= link_tag("assets/mycss/bootstrap-cerulean.min.css") ?>
     <?= link_tag("assets/mycss/charisma-app.css") ?>
 	<?= link_tag("assets/bower_components/fullcalendar/dist/fullcalendar.css") ?>

@@ -9,6 +9,7 @@
 
 
 <!-- JS FILES -->
+
 <script src="<?= base_url("assets/bower_components/bootstrap/dist/js/bootstrap.min.js") ?>"></script>
 <script src="<?= base_url("assets/myjs/jquery.cookie.js") ?>"></script>
 <script src="<?= base_url("assets/bower_components/moment/min/moment.min.js") ?>"></script>

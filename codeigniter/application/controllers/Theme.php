@@ -6,13 +6,14 @@ class Theme extends CI_Controller {
 	public function __construct()
 {
 	parent::__construct();
-	$this->load->view('template/header');
-	$this->load->view('template/footer');
+	
+	
 }
 	public function index()
-	{
-		 
-		$this->load->view('template/main');
+	{	 	
+		$this->load->view('template/Login');
+		
+		
 		  
 	}
 	public function demo(){
@@ -20,6 +21,12 @@ class Theme extends CI_Controller {
 	}
 	public function test(){
 		$this->load->model('MyUserModel');
+		
+	}
+	public function admin(){
+		$this->load->view('template/header');
+		$this->load->view('template/main');
+		$this->load->view('template/footer');
 		
 	}
 
