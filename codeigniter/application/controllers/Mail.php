@@ -9,33 +9,82 @@ use PHPMailer\PHPMailer\Exception;
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+
+
 class Mail extends CI_Controller{
 
-  public function GenerateToken(){
+  public function GenerateToken($user_email){
     echo $selector = bin2hex(random_bytes(8));
     $token = random_bytes(32);
-
-    $url = "www.mmtus.net/forgottenpwd/create-new-password.php?selector=".$selector."&validator=".bin2hex($token);
 
     echo "<br>" .$expires = date("U")+1800;
 
     echo "<br>" .$hashedToken = password_hash($token,PASSWORD_DEFAULT);
 
+    $url = $this->DB_Reset($user_email,$selector,$expires,$hashedToken);
+
+    echo "<br>".$url;
+
+    return $url;
 
   }
 
-  public function DB_Reset(){
+  public function DB_Reset($user_email,$selector,$expires,$hashedToken){
     //Delete TABLE pwdReset where email matches
-    //Insert the whole table
+    $this->db->where('pwdResetEmail',$user_email);
+    if(!$this->db->delete('pwdReset')){
+      echo "Error Deleting pwdReset table";
+      exit();
+    }
+
+    $query = $this->db->select('id')
+                        ->where('email',$user_email)
+                        ->get('users');
+    // $user_id = $this->db->where(['email'=>$user_email])
+    //         ->get('users');
+
+
+    if($query->num_rows()){
+      $user_id = $query->row()->id;
+    }
+    else
+    {
+      $this->session->set_flashdata('user_mail_check_msg','Your Email is not registered ...');
+      return redirect('Admin/forgotPass');
+      unset($_SESSION['user_mail_check_msg']);
+    }
+
+    
+    //Insert the in the pwd database table
+
+    $data = array(
+      'userID' => $user_id,
+      'pwdResetEmail' => $user_email,
+      'pwdResetSelector' => $selector,
+      'pwdResetToken' => $hashedToken,
+      'pwdResetExpires' => $expires
+      );
+
+      echo "<pre>"; print_r($data);
+      
+    if($this->db->insert('pwdReset', $data)){
+
+      $url = base_url('Auth/resetPassword')."?token=".$data['pwdResetToken']."&user_id=".$data['userID'];
+      return $url;
+
+    }
+
   }
 
 	public function send(){
 
-    $this->GenerateToken();
-    die();
+    $user_email = $this->input->post('uemail');
+
+    $url = $this->GenerateToken($user_email);
 
 
-     $user_email = $this->input->post('uemail');
+     
 
     $this->load->model('Admin/Forgot_Model');
     $user_id = $this->Forgot_Model->EmailCheck($user_email);
@@ -70,8 +119,7 @@ try {
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Here is the subject';
-    $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+    $mail->Body    = 'Click here to reset Password:<br>'.$url;
 
     $mail->send();
     echo 'Message has been sent';

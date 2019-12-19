@@ -23,7 +23,7 @@ class Admin extends CI_Controller{
            }
            else
            {
-               echo "NO match";
+               echo "No match";
            }
        }
        else{
@@ -35,5 +35,10 @@ class Admin extends CI_Controller{
 	public function forgotPass(){
 		$this->load->view('template/forgotPass');
 	}
+
+  public function login(){
+    $this->load->view('template/Login');
+  }
+
 }
 

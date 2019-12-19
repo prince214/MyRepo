@@ -12,8 +12,6 @@ class Theme extends CI_Controller {
 	public function index()
 	{	 	
 		$this->load->view('template/Login');
-		
-		
 		  
 	}
 	public function demo(){

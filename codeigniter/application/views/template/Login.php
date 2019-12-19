@@ -39,6 +39,26 @@
             <div class="alert alert-info">
                 Please login with your Username and Password.
             </div>
+            <?php
+
+                $success_msg= $this->session->flashdata('success_msg');
+                $error_msg= $this->session->flashdata('error_msg');
+ 
+                  if($success_msg){
+                    ?>
+                    <div class="alert alert-success">
+                      <?php echo $success_msg; ?>
+                    </div>
+                  <?php
+                  }
+                  if($error_msg){
+                    ?>
+                    <div class="alert alert-danger">
+                      <?php echo $error_msg; ?>
+                    </div>
+                    <?php
+                  }
+            ?>
              <?php echo form_open('Admin/index','class= "form-horizontal"'); ?>
              <!-- <form class="form-horizontal" action="index.html" method="post"> -->
                 <fieldset>

@@ -37,29 +37,33 @@
     <div class="row">
         <div class="well col-md-5 center login-box">
             <div class="alert alert-info">
-                Please Enter your registered E-mail ID
+                Please Enter your Password
             </div>
+            <?php
 
-            <?php 
-                    $mail_chk = $this->session->flashdata('user_mail_check_msg');
-                    if($mail_chk){
-                        ?>
+            $token = $_GET['token'];
 
-                        <div class="alert alert-danger">
-                            <?php echo $mail_chk; ?>
-                        </div>
-                        <?php
-                    }
             ?>
-
-             <?php echo form_open('Mail/send','class= "form-horizontal"'); ?>
+             <?php echo form_open('Auth/newPassword','class= "form-horizontal"'); ?>
                 <fieldset>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user red"></i></span>
-                        <!-- <input type="text" class="form-control" placeholder="Username"> -->
-                        <?php echo form_input(['class'=>'form-control','name'=>'uemail','type'=>'email','value'=>set_value("uemail"),'placeholder'=>'Email']); ?>
-                    </div>
+                    <input type = "hidden" name = "get_token" value = "<?php echo $token ?>" >
 
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
+                        <?php echo form_input(['class'=>'form-control','name'=>'newPassword','type'=>'password','value'=>set_value("newPassword"),'placeholder'=>'New Password']); ?>
+                    </div>
+                    <div>
+                        <?php echo form_error('newPassword'); ?>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="input-group input-group-lg" style="margin-top: 15px;">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock red"></i></span>
+                        <?php echo form_input(['class'=>'form-control','name'=>'repeatPassword','type'=>'password','value'=>set_value("repeatPassword"),'placeholder'=>'Repeat Password']); ?>
+                    </div>
+                    <div>
+                        <?php echo form_error('repeatPassword'); ?>
+                    </div>
                     <div class="clearfix"></div>
 
                     <p class="center col-md-5">

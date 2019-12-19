@@ -5,6 +5,8 @@ class LoginModel extends CI_Model{
 
 	public function isValidate($uemail,$upassword){
 
+		$upassword = md5($upassword);
+
 		$q = $this->db->where(['email'=>$uemail,'password'=>$upassword])
 						->get('users');
 
