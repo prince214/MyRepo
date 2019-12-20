@@ -42,6 +42,8 @@
 
             <?php 
                     $mail_chk = $this->session->flashdata('user_mail_check_msg');
+                    $check_mail = $this->session->flashdata('check_mail');
+
                     if($mail_chk){
                         ?>
 
@@ -50,6 +52,13 @@
                         </div>
                         <?php
                     }
+                    if($check_mail){
+                    ?>
+                    <div class="alert alert-success">
+                      <?php echo $check_mail; ?>
+                    </div>
+                  <?php
+                  }
             ?>
 
              <?php echo form_open('Mail/send','class= "form-horizontal"'); ?>

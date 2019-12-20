@@ -15,16 +15,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Mail extends CI_Controller{
 
   public function GenerateToken($user_email){
-    echo $selector = bin2hex(random_bytes(8));
+
+    $selector = bin2hex(random_bytes(8));
     $token = random_bytes(32);
-
-    echo "<br>" .$expires = date("U")+1800;
-
-    echo "<br>" .$hashedToken = password_hash($token,PASSWORD_DEFAULT);
+    $expires = date("U")+1800;
+    $hashedToken = password_hash($token,PASSWORD_DEFAULT);
 
     $url = $this->DB_Reset($user_email,$selector,$expires,$hashedToken);
-
-    echo "<br>".$url;
 
     return $url;
 
@@ -126,16 +123,22 @@ try {
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+    
+
+
+    //Setting flashmsg to check your mail
+    $this->session->set_flashdata('check_mail','Please Check your mail...');
+    
+    //Loading View to Check Your Email....
+    return redirect('Admin/forgotPass');
+
     }
     else
     {
       echo "Not Present in database";
     }
 
-
-
-
-       
+  
 		
 	}
 

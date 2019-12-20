@@ -67,8 +67,11 @@ class Auth extends CI_Controller{
 
      			if($query){
      				$this->session->set_flashdata('success_msg','Password Changed Successfully ...');
+                    $this->deleteForgotRequest($get_token);
      				return redirect('Admin/login');
      				unset($_SESSION['success_msg']);
+                    
+
      			}
      			else
      			{
@@ -81,7 +84,13 @@ class Auth extends CI_Controller{
 
    			}
 
-     	
+     }
+
+     public function deleteForgotRequest($token){
+        $this->load->model('Admin/Forgot_Model');
+        if(!$this->Forgot_Model->deleteForgotRequest($token)){
+            echo "error deleting Forgot Request";
+        }
 
      }
 		

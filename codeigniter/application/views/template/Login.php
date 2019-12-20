@@ -43,6 +43,8 @@
 
                 $success_msg= $this->session->flashdata('success_msg');
                 $error_msg= $this->session->flashdata('error_msg');
+                $invalid_user= $this->session->flashdata('invalid_user');
+               
  
                   if($success_msg){
                     ?>
@@ -58,6 +60,15 @@
                     </div>
                     <?php
                   }
+                  if($invalid_user){
+                    ?>
+                    <div class="alert alert-danger">
+                      <?php echo $invalid_user; ?>
+                    </div>
+                  <?php
+                  }
+                  
+
             ?>
              <?php echo form_open('Admin/index','class= "form-horizontal"'); ?>
              <!-- <form class="form-horizontal" action="index.html" method="post"> -->

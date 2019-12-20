@@ -23,7 +23,9 @@ class Admin extends CI_Controller{
            }
            else
            {
-               echo "No match";
+                $this->session->set_flashdata('invalid_user',"Email or Password doesn't match...");
+                $this->load->view('template/Login');
+                unset($_SESSION['invalid_user']);
            }
        }
        else{

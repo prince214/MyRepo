@@ -42,6 +42,11 @@ class Forgot_Model extends CI_Model{
 		 
 	}
 
+	public function deleteForgotRequest($token){
+		$this->db->where('pwdResetToken',$token)
+				 ->delete('pwdReset');
+	}
+
 
 	
 }
