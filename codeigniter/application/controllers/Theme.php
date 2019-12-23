@@ -23,7 +23,12 @@ class Theme extends CI_Controller {
 	}
 	public function admin(){
 		$this->load->view('template/header');
-		$this->load->view('template/main');
+		$this->load->view('template/sidebar');
+
+		$this->load->model('Admin/Admin_Model');
+		$data['users'] = $this->Admin_Model->showUser();
+		$this->load->view('template/main',$data);
+
 		$this->load->view('template/footer');
 		
 	}

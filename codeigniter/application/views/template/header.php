@@ -5,7 +5,7 @@
   
     <?= link_tag("https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css") ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     <?= link_tag("assets/mycss/bootstrap-cerulean.min.css") ?>
     <?= link_tag("assets/mycss/charisma-app.css") ?>
 	<?= link_tag("assets/bower_components/fullcalendar/dist/fullcalendar.css") ?>
@@ -14,13 +14,13 @@
 	<?= link_tag("assets/bower_components/colorbox/example3/colorbox.css") ?>
 	<?= link_tag("assets/bower_components/responsive-tables/responsive-tables.css") ?>
 	<?= link_tag("assets/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css") ?>
-	<?= link_tag("assets/css/jquery.noty.css") ?>
-	<?= link_tag("assets/css/noty_theme_default.css") ?>
-	<?= link_tag("assets/css/elfinder.min.css") ?>
-	<?= link_tag("assets/css/elfinder.theme.css") ?>
-	<?= link_tag("assets/css/jquery.iphone.toggle.css") ?>
-	<?= link_tag("assets/css/uploadify.css") ?>
-	<?= link_tag("assets/css/animate.min.css") ?> 
+	<?= link_tag("assets/mycss/jquery.noty.css") ?>
+	<?= link_tag("assets/mycss/noty_theme_default.css") ?>
+	<?= link_tag("assets/mycss/elfinder.min.css") ?>
+	<?= link_tag("assets/mycss/elfinder.theme.css") ?>
+	<?= link_tag("assets/mycss/jquery.iphone.toggle.css") ?>
+	<?= link_tag("assets/mycss/uploadify.css") ?>
+	<?= link_tag("assets/mycss/animate.min.css") ?> 
         </head>
         <body>
 

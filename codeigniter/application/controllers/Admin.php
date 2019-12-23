@@ -42,5 +42,68 @@ class Admin extends CI_Controller{
     $this->load->view('template/Login');
   }
 
+  public function addUser(){
+
+    $username = $this->input->post('username');
+    $role = $this->input->post('role');
+    $email = $this->input->post('email');
+    $password = md5($this->input->post('password'));
+
+    $data = array(
+      'username' => $username,
+      'role' => $role,
+      'email' => $email,
+      'password' => $password
+    );
+
+    $this->load->model('Admin/Admin_Model');
+
+    if($this->Admin_Model->addUser($data)){
+         redirect('Theme/admin');
+    }
+    
+  }
+
+  public function updateUser(){
+
+    $user_id = $this->input->post('user_id');
+    $username = $this->input->post('username');
+    $role = $this->input->post('role');
+    $email = $this->input->post('email');
+    $password = md5($this->input->post('password'));
+
+    $data = array(
+      'id' => $user_id,
+      'username' => $username,
+      'role' => $role,
+      'email' => $email,
+      'password' => $password
+    );
+
+    $this->load->model('Admin/Admin_Model');
+
+    if($this->Admin_Model->updateUser($data)){
+         redirect('Theme/admin');
+    }
+
+  }
+
+  public function deleteUser(){
+
+    $user_id = $this->input->post('user_id');
+
+    $this->load->model('Admin/Admin_Model');
+
+    if($this->Admin_Model->deleteUser($user_id)){
+         redirect('Theme/admin');
+    }
+
+  }
+
+  public function toggle_status(){
+      $this->load->model('Admin/Admin_Model');
+      $this->Admin_Model->toggle_status();
+  }
+
 }
 
