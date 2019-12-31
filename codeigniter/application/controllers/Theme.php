@@ -22,6 +22,9 @@ class Theme extends CI_Controller {
 		
 	}
 	public function admin(){
+
+		if($this->session->userdata('id')){
+
 		$this->load->view('template/header');
 		$this->load->view('template/sidebar');
 
@@ -30,6 +33,12 @@ class Theme extends CI_Controller {
 		$this->load->view('template/main',$data);
 
 		$this->load->view('template/footer');
+      
+    	}
+    	else{
+    		redirect('Admin/login');
+    	}
+		
 		
 	}
 

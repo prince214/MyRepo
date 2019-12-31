@@ -51,18 +51,21 @@ class Admin_Model extends CI_Model{
 	}
 
 	public function toggle_status(){
+
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-	    echo $status = $_POST["status"];
-	    $user_id = $_POST["user_id"];
+	    $status = $_POST["status"];
+	    echo $user_id = $_POST["user_id"];
 
 	    if ($status == "active") {
 	    	$query = $this->db->set('status', 'deactive')
 					      ->where('id',$user_id)
 				          ->update('users');
 
-				if($query)
-					return "deactive";
+				if($query){
+					$this->session->set_flashdata('status','User has been Activated');
+					return $user_id;
+				}
 				else
 					return false;
 	    }
@@ -72,8 +75,10 @@ class Admin_Model extends CI_Model{
 					      ->where('id',$user_id)
 				          ->update('users');
 
-				if($query)
-					return "active";
+				if($query){
+					$this->session->set_flashdata('status','User has been Deactivated');
+					return $user_id;
+				}
 				else
 					return false;
 
@@ -82,6 +87,77 @@ class Admin_Model extends CI_Model{
 
 
 		}
+	}
+
+	public function logout(){
+		$this->session->unset_userdata('id');
+		session_destroy();
+		redirect('Admin/login');
+
+	}
+
+	public function uploadFiles($image_paths,$user_email){
+
+		// echo "string".$user_id = $this->session->userdata('id');
+
+		 $query = $this->db->select('id')
+		 			 		->where('email',$user_email)
+		 			 		->get('users');
+
+		if($query->num_rows()){
+		$user_id = $query->row()->id;
+		}
+
+		// $user_id = $this->db->get('user_images');
+		// return $query->result_array();
+
+
+		print_r($image_paths);
+
+		echo "<pre>";
+		print_r($user_id);
+		
+		
+
+		foreach ($image_paths as $path) { 
+			$data = array(
+        'user_id' => $user_id,
+        'file_path' => $path,
+		);
+			$query = $this->db->insert('user_images',$data);
+
+		}
+
+
+		
+
+				if($query){
+					return true;
+				}
+				else
+					return false;
+
+		// return true;
+	}
+
+	public function display_images($id){
+
+		$array = array();
+
+		$query = $this->db->where('user_id',$id)
+						  ->get('user_images');
+		return $query->result_array();
+
+
+
+	}
+
+	public function show_featured_img($id){
+
+		$query = $this->db->select('file_path')
+						  ->where('user_id',$id)
+						  ->get('user_images');
+		return $query->result_array();
 	}
 	
 

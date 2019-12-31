@@ -40,7 +40,8 @@
                 Please Enter your registered E-mail ID
             </div>
 
-            <?php 
+                    <?php 
+                    
                     $mail_chk = $this->session->flashdata('user_mail_check_msg');
                     $check_mail = $this->session->flashdata('check_mail');
 

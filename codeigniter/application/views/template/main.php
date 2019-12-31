@@ -38,13 +38,41 @@
         </div>
     </div>
     <div class="box-content">
-    <div class="alert alert-info">For help with such table please check <a href="http://datatables.net/" target="_blank">http://datatables.net/</a></div>
+
+        <style>
+.alert-deactive
+{
+padding:15px;
+margin-bottom:20px;
+border:1px solid transparent;
+border-radius:4px;
+color:#31708f;
+background-color:#ffcccb;
+border-color:#ffcccb
+}
+
+.alert-active
+{
+padding:15px;
+margin-bottom:20px;
+border:1px solid transparent;
+border-radius:4px;
+color:#31708f;
+background-color:a1f1a1;
+border-color:#a1f1a1
+}
+        </style>
+    
+    <div id="user-status" class="alert-active" style="display: none; color: white;">
+    </div>
+  
     <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
     <thead>
     <tr>
         <th>Username</th>
         <th>Date registered</th>
         <th>Role</th>
+        <th>Image</th>
         <th>Status</th>
         <th>Actions</th>
     </tr>
@@ -60,18 +88,40 @@
         <td class="center"><?= $row['registered_date']; ?></td>
         <td class="center"><?= $row['role']; ?></td>
         <td class="center">
+            <?php
+
+            $this->load->model('Admin/Admin_Model');
+            $featured_img_path = $this->Admin_Model->show_featured_img($row['id']);
+            // print_r();
+            // echo $featured_img_path['0']['file_path'];
+            if ($featured_img_path ) {
+            ?>
+
+            <img src="<?php echo base_url($featured_img_path['0']['file_path']) ?>" width="55" height="55">
+
+        <?php } ?>
+        </td>
+        <td class="center">
+
              <?php if($row['status'] == "active"): ?>
-             <button id="demo" data-id="<?= $row['id']; ?>" data-status="active" class="btn btn-danger btn-sm toggle-status-btn" value="active" ><span class="test" >Active</span></button>
+             <input type="button" id="btn_<?= $row['id']; ?>" data-id="<?= $row['id']; ?>" data-status="active" class="btn btn-success btn-sm toggle-status-btn" value="active" ></input>
              <?php endif ?>
 
              <?php if($row['status'] == "deactive"): ?>
-             <button id="demo" data-id="<?= $row['id']; ?>" data-status="deactive" class="btn btn-success btn-sm toggle-status-btn" value="deactive"><span class="test" >Inactive</span></button>
+             <input type="button" id="btn_<?= $row['id']; ?>" data-id="<?= $row['id']; ?>" data-status="deactive" class="btn btn-danger btn-sm toggle-status-btn" value="deactive" ></input>
              <?php endif ?>
+
+             
         </td>
         <td class="center">
             <a class="btn btn-info" href="#" data-toggle="modal" data-target="#editUserModel<?= $row['id']; ?>">
                 <i class="glyphicon glyphicon-edit icon-white"></i>
                 Edit
+            </a>
+
+            <a class="btn btn-primary" href="#" data-toggle="modal" data-target="#view<?= $row['id']; ?>">
+                <i class="glyphicon glyphicon-edit icon-white"></i>
+                View
             </a>
 
             <form style = "display: inline;" action="<?= base_url("Admin/deleteUser"); ?>" method="POST">
@@ -146,6 +196,49 @@
         </div>
     </div>
 
+    <!-- ########################## View Images MODEL ########################## -->
+     <div class="modal fade" id="view<?= $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>User Images</h3>
+                </div>
+                <div class="modal-body">
+                    
+
+                <?php 
+
+                    $this->load->model('Admin/Admin_Model');
+                    $image_path = $this->Admin_Model->display_images($row['id']);
+                    // print_r($image_path);
+
+
+
+
+                    foreach ($image_path as $path) {
+                        $image_path = base_url($path["file_path"]);
+                        ?>  
+
+                        <img src="<?php echo $image_path ?>" width=120 height=120>
+
+                        <?php
+                    }
+
+
+                 ?>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <?php }} ?>
     
     </tbody>
@@ -181,7 +274,7 @@
                     
 
                 <div class="box-content">
-                <form action="<?= base_url("Admin/addUser") ?>" method="POST" role="form">
+                <form action="<?= base_url("Admin/addUser") ?>" method="POST" enctype="multipart/form-data" role="form">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Username</label>
                         <input type="text" class="form-control" name="username" placeholder="Enter Username">
@@ -206,6 +299,15 @@
                         <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
 
+                     <div class="form-group">
+                        <label for="exampleInputFile">Upload Images</label>
+                        <input type="file" name='files[]' multiple=""  />
+                        <?php 
+                        if(isset($upload_error)){
+                            echo $upload_error;
+                        }
+                        ?>
+                    </div>
 
 
 
@@ -258,28 +360,49 @@
 // }
 
 // document.addEventListener("click", function(){
+$(document).ready(function() {
 $('.toggle-status-btn').click(function() {
     var status = $(this).attr("data-status");
     var user_id = $(this).attr("data-id");
+    var id = '#' + $(this).attr('id');
+    // console.log($("#user-status").attr("class"));
 
-    // console.log(status);
-    // console.log(user_id);
+    // console.log(id);
+
+ 
 
     $.ajax({
         type: 'POST',
         url: '<?= base_url("Admin/toggle_status") ?>',
         data: { status: status, user_id: user_id },
         success: function(response) {
-            // console.log("response: "+response);
-            if(response == "active"){
-                $('toggle-status-btn').val('deactive');
-                $(".test").html("deactive");
-                console.log("success");
+            if(status == "active"){
+                console.log(response);
+                $(id).val("deactive");
+                $(id).attr("data-status","deactive");
+                $(id).addClass('btn-danger').removeClass('btn-success');
+                // $status = $this->session->flashdata('status');
+                // if($status){
+                    $("#user-status").html("User has been Deactivated");
+                    var stat = $("#user-status").attr("class");
+                    $("#user-status").addClass('alert-deactive').removeClass(stat);
+                    $("#user-status").css("display", "block");
+                    $("#user-status").fadeOut(3000);
+                // }
             }
-            if(response == "deactive"){
-                $('toggle-status-btn').val('active');
-                $(".test").html("active");
-                console.log("success");
+            if(status == "deactive"){
+                console.log(response);
+                $(id).val("active");
+                $(id).attr("data-status","active");
+                $(id).addClass('btn-success').removeClass("btn-danger");
+                // $status = $this->session->flashdata('status');
+                // if($status){
+                $("#user-status").html("User has been Activated");
+                var stat = $("#user-status").attr("class");
+                $("#user-status").addClass('alert-active').removeClass(stat);
+                $("#user-status").css("display", "block");
+                $("#user-status").fadeOut(3000);
+                // }
             }
             
         }
@@ -287,6 +410,6 @@ $('.toggle-status-btn').click(function() {
 
 
 });
-  
+});
 
 </script>
