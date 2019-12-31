@@ -88,19 +88,11 @@ border-color:#a1f1a1
         <td class="center"><?= $row['registered_date']; ?></td>
         <td class="center"><?= $row['role']; ?></td>
         <td class="center">
-            <?php
 
-            $this->load->model('Admin/Admin_Model');
-            $featured_img_path = $this->Admin_Model->show_featured_img($row['id']);
-            // print_r();
-            // echo $featured_img_path['0']['file_path'];
-            if ($featured_img_path ) {
-            ?>
+             <img src="<?php echo base_url($row['user_images'][0]['file_path']) ?>" width="55" height="55">
+         </td>
 
-            <img src="<?php echo base_url($featured_img_path['0']['file_path']) ?>" width="55" height="55">
-
-        <?php } ?>
-        </td>
+            
         <td class="center">
 
              <?php if($row['status'] == "active"): ?>
@@ -210,15 +202,7 @@ border-color:#a1f1a1
                     
 
                 <?php 
-
-                    $this->load->model('Admin/Admin_Model');
-                    $image_path = $this->Admin_Model->display_images($row['id']);
-                    // print_r($image_path);
-
-
-
-
-                    foreach ($image_path as $path) {
+                    foreach ($row['user_images'] as $path) {
                         $image_path = base_url($path["file_path"]);
                         ?>  
 

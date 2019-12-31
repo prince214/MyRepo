@@ -18,7 +18,17 @@ class Admin_Model extends CI_Model{
 
 
 		$query = $this->db->get('users');
-		return $query->result_array();
+		$list = $query->result_array();
+		foreach($list as $key => $user_list){
+			$user_id = $user_list['id'];
+			$user_images = $this->db->where('user_id',$user_id)
+				          ->get('user_images');
+		    $user_images = $user_images->result_array();
+		    $list[$key]['user_images'] = $user_images;
+		}
+
+		return $list;
+		// echo "<pre>";print_r($list);
 		
 
 	}
