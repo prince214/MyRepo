@@ -21,6 +21,32 @@
 	<?= link_tag("assets/mycss/jquery.iphone.toggle.css") ?>
 	<?= link_tag("assets/mycss/uploadify.css") ?>
 	<?= link_tag("assets/mycss/animate.min.css") ?> 
+
+
+        <style>
+.alert-deactive
+{
+padding:15px;
+margin-bottom:20px;
+border:1px solid transparent;
+border-radius:4px;
+color: white;
+background-color: #FF0000;
+border-color: #FF0000;
+}
+
+.alert-active
+{
+padding:15px;
+margin-bottom:20px;
+border:1px solid transparent;
+border-radius:4px;
+color: #32CD32;
+background-color: #32cd32;
+border-color: #32cd32;
+}
+        </style>
+
         </head>
         <body>
 

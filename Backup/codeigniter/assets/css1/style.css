@@ -1,0 +1,35 @@
+
+/*.radio-inline input[type="radio"] {
+    margin: 4px 0 0;
+    margin-left: 14px;
+    margin-top: 1px\9;
+    line-height: normal;
+}
+
+
+.checkbox-inline, .radio-inline {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
+   margin-left: 0px;
+}
+
+.form-horizontal1 .checkbox-inline, .radio-inline {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+    margin-bottom: 0;
+    font-weight: 400;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 405px;
+}
+/*.form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+    padding-top: 7px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}*/*/

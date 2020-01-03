@@ -39,29 +39,6 @@
     </div>
     <div class="box-content">
 
-        <style>
-.alert-deactive
-{
-padding:15px;
-margin-bottom:20px;
-border:1px solid transparent;
-border-radius:4px;
-color:#31708f;
-background-color:#ffcccb;
-border-color:#ffcccb
-}
-
-.alert-active
-{
-padding:15px;
-margin-bottom:20px;
-border:1px solid transparent;
-border-radius:4px;
-color:#31708f;
-background-color:a1f1a1;
-border-color:#a1f1a1
-}
-        </style>
     
     <div id="user-status" class="alert-active" style="display: none; color: white;">
     </div>
@@ -88,7 +65,6 @@ border-color:#a1f1a1
         <td class="center"><?= $row['registered_date']; ?></td>
         <td class="center"><?= $row['role']; ?></td>
         <td class="center">
-
              <img src="<?php echo base_url($row['user_images'][0]['file_path']) ?>" width="55" height="55">
          </td>
 
@@ -106,6 +82,14 @@ border-color:#a1f1a1
              
         </td>
         <td class="center">
+
+            <!-- <form style = "display: inline;" action="<?= base_url("Admin/upload_img"); ?>" method="POST">
+            <button type="submit" name="upload" class="btn btn-warning" value="<?= $row['id']; ?>">
+                <i class="glyphicon glyphicon-upload icon-white"></i>
+                Upload
+            </button>
+            </form> -->
+
             <a class="btn btn-info" href="#" data-toggle="modal" data-target="#editUserModel<?= $row['id']; ?>">
                 <i class="glyphicon glyphicon-edit icon-white"></i>
                 Edit
@@ -125,68 +109,7 @@ border-color:#a1f1a1
         </td>
     </tr>
 
-    <!-- ########################## EDIT USERS MODEL ########################## -->
-     <div class="modal fade" id="editUserModel<?= $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h3>Edit User</h3>
-                </div>
-                <div class="modal-body">
-                    
-
-                <div class="box-content">
-                <form action="<?= base_url("Admin/updateUser") ?>" method="POST" role="form">
-
-                    <input type="hidden" class="form-control" value="<?= $row['id']; ?>" name="user_id">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
-                        <input type="text" class="form-control" value="<?= $row['username']; ?>" name="username" placeholder="Enter Username">
-                    </div>
-
-                    <div class="form-group">
-                    <label for="exampleSelect1">Role</label>
-                    <select class="form-control" name="role">
-                    <option value="staff">Staff</option>
-                    <option value="student">Student</option>
-                    <option value="teacher">Teacher</option>
-                    <option value="teacher">Admin</option>
-                    </select>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" value="<?= $row['email']; ?>" name="email" placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Enter new Password">
-                    </div>
-
-               
-
-
-                    <!-- <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
-                    </div> -->
-                    <button type="submit" name="submit" class="btn btn-default">Submit</button>
-                </form>
-
-                </div>
-
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
-                </div>
-            </div>
-        </div>
-    </div>
+        
 
     <!-- ########################## View Images MODEL ########################## -->
      <div class="modal fade" id="view<?= $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -293,22 +216,15 @@ border-color:#a1f1a1
                         ?>
                     </div>
 
-
-
-                    <!-- <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
-                    </div> -->
-                    <button type="submit" name="submit" class="btn btn-default">Submit</button>
-                </form>
-
                 </div>
 
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
-                    <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+                    <button type="submit" name="submit" class="btn btn-primary" >ADD</button>
+                    <!-- <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a> -->
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -324,36 +240,12 @@ border-color:#a1f1a1
 </div><!--/.fluid-container-->
 
 <script type="text/javascript">
-// function toggle_status(){
 
-//     var status = 
-
-
-//     $(function(){
-//     $.ajax({
-//       type: "POST",
-//       url: 'AjaxCallTest.php',
-//       data: ({Imgname:"13"}),
-//       success: function(data) {
-//         alert(data);
-//       }
-//     });
-//   });
-
-
-// }
-
-// document.addEventListener("click", function(){
 $(document).ready(function() {
 $('.toggle-status-btn').click(function() {
     var status = $(this).attr("data-status");
     var user_id = $(this).attr("data-id");
     var id = '#' + $(this).attr('id');
-    // console.log($("#user-status").attr("class"));
-
-    // console.log(id);
-
- 
 
     $.ajax({
         type: 'POST',
@@ -371,7 +263,7 @@ $('.toggle-status-btn').click(function() {
                     var stat = $("#user-status").attr("class");
                     $("#user-status").addClass('alert-deactive').removeClass(stat);
                     $("#user-status").css("display", "block");
-                    $("#user-status").fadeOut(3000);
+                    $("#user-status").fadeOut(5000);
                 // }
             }
             if(status == "deactive"){
@@ -385,7 +277,7 @@ $('.toggle-status-btn').click(function() {
                 var stat = $("#user-status").attr("class");
                 $("#user-status").addClass('alert-active').removeClass(stat);
                 $("#user-status").css("display", "block");
-                $("#user-status").fadeOut(3000);
+                $("#user-status").fadeOut(5000);
                 // }
             }
             

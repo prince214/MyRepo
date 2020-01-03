@@ -5,6 +5,7 @@ class Admin extends CI_Controller{
 
 	public function index(){
 
+
        $this->form_validation->set_rules('uemail','Email','required');
        $this->form_validation->set_rules('upassword','Password','required|min_length[3]');
        $this->form_validation->set_error_delimiters('<div class="text-danger">','</div>');
@@ -137,17 +138,7 @@ class Admin extends CI_Controller{
 
     $this->load->model('Admin/Admin_Model');
 
-    
-
-
-
-      // $this->load->model('Admin/Admin_Model');
-
     $user_email = $this->input->post('email');
-    // if(){
-    //     echo "success.............";
-    //        }
-   
 
     if($this->Admin_Model->addUser($data) && $this->Admin_Model->uploadFiles($files_arr,$user_email)){
          redirect('Theme/admin');

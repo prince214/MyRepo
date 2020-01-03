@@ -11,16 +11,13 @@ class Theme extends CI_Controller {
 }
 	public function index()
 	{	 	
+		if($this->session->userdata('id')){
+        return redirect('Theme/admin');
+    	}
 		$this->load->view('template/Login');
 		  
 	}
-	public function demo(){
-		$this->load->view('template/test');
-	}
-	public function test(){
-		$this->load->model('MyUserModel');
-		
-	}
+	
 	public function admin(){
 
 		if($this->session->userdata('id')){
