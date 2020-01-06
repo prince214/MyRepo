@@ -126,8 +126,8 @@ div {
         <?php 
           foreach ($comedyMovies as $row) {
         ?>
-      <div> <img style="height: 80%;" src="<?php echo base_url($row['poster']); ?>">
-         <div><a style="color: white;" href=""><?php echo $row['movie_name']; ?></a></div>
+     <div> <img style="height: 80%;" src="<?php echo base_url($row['poster']); ?>">
+        <div><a style="color: white;" href="<?php echo base_url("Movies_controller/movieDetails") ?>?id=<?php echo $row['id']; ?>"><?php echo $row['movie_name']; ?></a></div>
       </div>
 
     <?php } ?>
@@ -143,7 +143,7 @@ div {
           foreach ($thrillerMovies as $row) {
         ?>
       <div> <img style="height: 80%;" src="<?php echo base_url($row['poster']); ?>">
-         <div><a style="color: white;" href=""><?php echo $row['movie_name']; ?></a></div>
+        <div><a style="color: white;" href="<?php echo base_url("Movies_controller/movieDetails") ?>?id=<?php echo $row['id']; ?>"><?php echo $row['movie_name']; ?></a></div>
       </div>
 
 

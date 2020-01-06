@@ -93,9 +93,27 @@ class Movies_model extends CI_Model{
 						  ->get('mv_movies');
 		$list = $query->result_array();
 
+
+
 		return $list;
 
 	
+
+	}
+
+	public function getUser(){
+
+		$query = $this->db->where('id','24')
+						  ->get('users');
+
+		$list = $query->result_array();
+
+		// print_r($list[0]['id']);
+		// die();
+		
+
+		return $list;
+
 
 	}
 

@@ -52,7 +52,6 @@ border-color: #32cd32;
         </head>
         <body>
 
-
         	<!-- topbar starts -->
     <div class="navbar navbar-default" style="margin: 0;" role="navigation">
 

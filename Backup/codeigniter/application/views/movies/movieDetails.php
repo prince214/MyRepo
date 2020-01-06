@@ -1,22 +1,20 @@
 <?php
 
 // echo "<pre>";
-// echo print_r($movieInfo);
+print_r($getUser);
+// print_r($movieInfo);
+
 // die();
 
+
 ?>
+
 <style type="text/css">
 	
 	h4{
 		display: inline;
 	}
 
-	/**
- * Oscuro: #283035
- * Azul: #03658c
- * Detalle: #c7cacb
- * Fondo: #dee1e3
- ----------------------------------*/
  * {
  	margin: 0;
  	padding: 0;
@@ -278,6 +276,22 @@ body {
 	}
 }
 
+.userComment{
+		box-shadow: 10px;
+		width: 722px;
+		border: 0;
+		height: 40px;
+		padding: 20px;
+	}
+
+.userReplyBar{
+	box-shadow: 10px;
+		width: 680px;
+		border: 0;
+		height: 40px;
+		padding: 20px;
+}
+
 
 
 </style>
@@ -345,17 +359,9 @@ body {
 
 
 			<!-- ####################### Comments section ##########################-->
-			<div>
+			<div><hr/>
 
-<style type="text/css">
-	.userComment{
-		box-shadow: 10px;
-		width: 722px;
-		border: 0;
-		height: 40px;
-		padding: 20px;
-	}
-</style>
+
 <!-- Contenedor Principal -->
 	<div class="comments-container">
 		<h1>COMMENTS </h1>
@@ -377,16 +383,17 @@ body {
 					
 					<div class="comment-box">
 						<div class="comment-head">
-							<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+							<h6 class="comment-name"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
 							<span>hace 20 minutos</span>
-							<i class="fa fa-reply"></i>
-							<i class="fa fa-heart"></i>
+							<i class="fa fa-reply on-reply"></i>
+							<i id="" class="fa fa-heart test"></i>
 						</div>
 						<div class="comment-content">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
 						</div>
 					</div>
 				</div>	
+				<span id="reply-listing"></span>
 								<!-- if comments_reply == TRUE #THEN SHOW -->
 								<!-- Reply comments -->
 								<ul class="comments-list reply-list">
@@ -399,54 +406,16 @@ body {
 												<h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
 												<span>hace 10 minutos</span>
 												<i class="fa fa-reply"></i>
-												<i class="fa fa-heart"></i>
+												<i class="fa fa-heart test"></i>
 											</div>
 											<div class="comment-content">
 												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
 											</div>
 										</div>
 									</li>
-
-									<li>
-										<!-- Avatar -->
-										<div class="comment-avatar"><img src="<?php echo base_url("upload/temp/profile.jpg") ?>" alt=""></div>
-										
-										<div class="comment-box">
-											<div class="comment-head">
-												<h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-												<span>hace 10 minutos</span>
-												<i class="fa fa-reply"></i>
-												<i class="fa fa-heart"></i>
-											</div>
-											<div class="comment-content">
-												Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-											</div>
-										</div>
-									</li>
-
-
 								</ul>
 			</li>
-
-			<li>
-				<div class="comment-main-level">
-					<!-- Avatar -->
-					<div class="comment-avatar"><img src="<?php echo base_url("upload/temp/profile.jpg") ?>" alt=""></div>
-					
-					<div class="comment-box">
-						<div class="comment-head">
-							<h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-							<span>hace 10 minutos</span>
-							<i class="fa fa-reply"></i>
-							<i class="fa fa-heart"></i>
-						</div>
-						<div class="comment-content">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-						</div>
-					</div>
-				</div>
-				<span id="testing">TETSTINGF</span>
-			</li>
+			<span id="testing"></span>
 		</ul>
 	</div>
 				
@@ -460,7 +429,11 @@ body {
         <div class="modal-dialog" style="margin: auto; width: 50%; top: 20%;">
                 <div class="container">
                 <video controls crossorigin playsinline poster="">
-                <source src="<?php echo base_url($row['src']) ?>" type="video/mp4" size="720">
+
+              
+				 <source src="<?php echo base_url($row['src']) ?>" type="video/mp4" size="720">
+				
+               
 
                 <!-- Caption files -->
                 <track kind="captions" label="English" srclang="en" src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
@@ -498,9 +471,75 @@ body {
 
 $(document).ready(function() {
 
+	//Like Button
+	$('.test').click(function(){
+           $(this).css("color", "red");
+	});
+
+
+	//Reply Bar
+	$('.on-reply').click(function(){
+		console.log("Fasdf");
+		const board_id = document.getElementById('reply-listing');
+
+		const input_area = `<ul class="comments-list reply-list"><li>
+							<input data-movieID="<?php echo $movieInfo[0]['id']; ?>" data-id="<?php echo $_SESSION['id'] ?>" style="display: inline;" id="userReply<?php echo $_SESSION['id']  ?>" id="userReplyBar<?php echo $_SESSION['id'] ?>" class="userReplyBar" placeholder="Enter Your Reply ..." type="input" ></li></ul>`;
+		 const position = "beforeend";
+    	 board_id.insertAdjacentHTML(position,input_area);
+
+
+  //   	 document.querySelector('#userReplyBar<?php echo $_SESSION['id'] ?>').addEventListener('keypress', function (e) {
+		//     if (e.key === 'Enter') {
+		//      console.log("fasfd");
+		//     }
+		// });
+ console.log("asdfasf");
+		$('#userReplyBar<?php echo $_SESSION['id'] ?>').on('keypress', 'span', function(e){
+    		
+    		 console.log("asdfasf");
+		});
+		 
+   //  	 document.addEventListener("click", function(){
+		 // $('#userReplyBar<?php echo $_SESSION['id'] ?>').keypress(function (e) {
+		 // var key = e.which;
+		 // if(key == 13)  // the enter key code
+		 //  {
+
+		 //  	var userReply = $('#userReply<?php echo $_SESSION['id'] ?>').val();
+		 // console.log(userReply);
+
+		 //  	const item = `
+			// <ul class="comments-list reply-list">
+			// <li>
+			// <!-- Avatar -->
+			// <div class="comment-avatar"><img src="<?php echo base_url("upload/temp/profile.jpg") ?>" alt=""></div>
+
+			// <div class="comment-box">
+			// <div class="comment-head">
+			// <h6 class="comment-name "><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
+			// <span>hace 10 minutos</span>
+			// <i class="fa fa-reply"></i>
+			// <i class="fa fa-heart"></i>
+			// </div>
+			// <div class="comment-content">
+			// Lorem ipsum: ${userReply}
+			// </div>
+			// </div>
+			// </li>
+			// </ul>
+   //  		`;
+   //  		const position = "beforeend";
+   //  		board_id.insertAdjacentHTML(position,item);
+
+		 //  }
+
+           
+   
+});
 
 
 
+	//Inserting comments by users
 	$('#userComment').keypress(function (e) {
 	 var key = e.which;
 	 if(key == 13)  // the enter key code
@@ -508,18 +547,46 @@ $(document).ready(function() {
 	    var userComment = $('#userComment').val();
 	    var user_id = $(this).attr("data-id");
 	    var movieID = $(this).attr("data-movieID");
-	    // console.log(userComment);
+	    const board_id = document.getElementById('testing');
 
 	    $.ajax({
         type: 'POST',
         url: '<?= base_url("Movies_controller/addUserComment") ?>',
         data: { userComment: userComment, user_id: user_id, movieID: movieID },
-        success: function(response) {
-           	
-           	console.log(response)
-$("#testing").append("Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?");
-           	if (response == 'TRUE' ) 
+        dataType:"JSON",
+        success: function(data) {
+
+           	if (data.status == '200' ) 
            	{	
+           		
+           		const item = `
+           		<li>
+					<div class="comment-main-level">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img src="<?php echo base_url("upload/temp/profile.jpg") ?>" alt=""></div>
+					
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name"><?php echo $getUser[0]['username']; ?></h6>
+							<span>hace 20 minutos</span>
+							<i class="fa fa-reply"></i>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+							${data.userComment}
+						</div>
+					</div>
+				</div>	
+
+				<span class="reply-section">
+								
+				</span>
+				</li>
+
+    `;
+    const position = "beforeend";
+    board_id.insertAdjacentHTML(position,item);
+
            		//ALSO CHECK IF THE SAME USER IS LOGGED IN WHO'S SERVER RESPONSE IS COMMING
            		//APPEND HTML CODE WITH USER-COMMENT
            		

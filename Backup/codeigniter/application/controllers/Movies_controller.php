@@ -156,19 +156,34 @@ class Movies_controller extends CI_Controller {
 
         $this->load->model('Admin/Movies_model');
         $data['movieInfo'] = $this->Movies_model->movie_details();
+        $data['getUser'] = $this->Movies_model->getUser();
 
         $this->load->view('template/header');
         $this->load->view('movies/movieDetails',$data);
         $this->load->view('template/footer');
     }
 
+  
+
 
     public function addUserComment(){
 
-        echo $userComment = $this->input->post('userComment');
-        echo $user_id = $this->input->post('user_id');
-        echo $movieID = $this->input->post('movieID');
-        // return true;
+        $userComment = $this->input->post('userComment');
+        $user_id = $this->input->post('user_id');
+        $movieID = $this->input->post('movieID');
+
+
+
+        $data = array();
+        $data['userComment'] = $userComment;
+        $data['user_id'] = $user_id;
+        $data['movieID'] = $movieID;
+        $data['status'] = '200';
+
+
+
+//         $data = array('userComment' => $userComment, 'status' => '200');
+        echo json_encode($data);
 
 
     }

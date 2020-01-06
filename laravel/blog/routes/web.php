@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
 
-	$languages = ['Java','Python','C++'];
+Route::get('/prince', 'LanguagesController@List');
 
-
-    return view('welcome',['lang'=>$languages]);
-});
 
 Route::view('/register','Login.login');
 

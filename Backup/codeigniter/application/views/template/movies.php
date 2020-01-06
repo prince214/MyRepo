@@ -60,7 +60,7 @@
         <td class="center">
            <?= $row['src']; ?>
         </td>
-        <td class="center">
+        <td  class="center">
            <?= $row['description']; ?>
         </td>
         <td class="center">
