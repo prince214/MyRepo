@@ -40,7 +40,7 @@
     <div class="box-content">
 
     
-    <div id="user-status" class="alert-active" style="display: none; color: white;">
+    <div id="user-status" class="alert" style="display: none; color: white;">
     </div>
   
     <table class="table table-striped table-bordered bootstrap-datatable datatable responsive">
@@ -277,7 +277,16 @@
 
 
 
+<?php 
 
+if($this->session->flashdata('status')){
+    echo "sfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffffsfddddddddddddddsdfsfdsfsffssffffffff";
+    echo $this->session->flashdata('status');
+}
+
+$test = "fsadfsf";
+
+?>
 
     
   
@@ -297,6 +306,7 @@ $('.toggle-status-btn').click(function() {
         url: '<?= base_url("Admin/toggle_status") ?>',
         data: { status: status, user_id: user_id },
         success: function(response) {
+            // console.log(response);
             if(status == "active"){
                 console.log(response);
                 $(id).val("deactive");
@@ -304,11 +314,13 @@ $('.toggle-status-btn').click(function() {
                 $(id).addClass('btn-danger').removeClass('btn-success');
                 // $status = $this->session->flashdata('status');
                 // if($status){
-                    $("#user-status").html("User has been Deactivated");
+                    
                     var stat = $("#user-status").attr("class");
                     $("#user-status").addClass('alert-deactive').removeClass(stat);
                     $("#user-status").css("display", "block");
-                    $("#user-status").fadeOut(5000);
+                    $("#user-status").html("User has been Deactivated");
+                    $("#user-status").fadeOut(4000);
+                    // $("#user-status").removeClass("alert-deactive");
                 // }
             }
             if(status == "deactive"){
@@ -318,11 +330,13 @@ $('.toggle-status-btn').click(function() {
                 $(id).addClass('btn-success').removeClass("btn-danger");
                 // $status = $this->session->flashdata('status');
                 // if($status){
-                $("#user-status").html("User has been Activated");
+                
                 var stat = $("#user-status").attr("class");
                 $("#user-status").addClass('alert-active').removeClass(stat);
                 $("#user-status").css("display", "block");
-                $("#user-status").fadeOut(5000);
+                $("#user-status").html("User has been Activated");
+                $("#user-status").fadeOut(4000);
+                // $("#user-status").removeClass("alert-active");
                 // }
             }
             

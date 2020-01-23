@@ -60,10 +60,12 @@ class Admin_Model extends CI_Model{
 
 	public function toggle_status(){
 
+		$data = array();
+
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	    $status = $_POST["status"];
-	    echo $user_id = $_POST["user_id"];
+	    $user_id = $_POST["user_id"];
 
 	    if ($status == "active") {
 	    	$query = $this->db->set('status', 'deactive')
@@ -72,6 +74,9 @@ class Admin_Model extends CI_Model{
 
 				if($query){
 					$this->session->set_flashdata('status','User has been Activated');
+
+					$data['status'] = 'active';
+					echo json_encode($data);
 					return $user_id;
 				}
 				else
@@ -85,6 +90,8 @@ class Admin_Model extends CI_Model{
 
 				if($query){
 					$this->session->set_flashdata('status','User has been Deactivated');
+					$data['status'] = 'deactive';
+					echo json_encode($data);
 					return $user_id;
 				}
 				else
